@@ -27,7 +27,15 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'App_Login:logout' %}">Logout</a>
           </li>
-
+          {% if user.user_profile.profile_pic %}
+          <li class="nav-item">
+            <a class="nav-link" href="#" width='40px' height='40px' class='rounded-circle' ><img src='/media/profile_pics/{{user_profile.profile_pics}}' width='40px' height='40px' class='rounded-circle'></a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="#" ><img src='/media/save-commentor-pic.jpeg' width='40px' height='40px' class='rounded-circle'></a>
+          </li>
+          {% endif %}
         </ul>
       </nav>
     <div class="container" style="padding-top:20px">
