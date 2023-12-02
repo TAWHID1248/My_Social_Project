@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  {% block title_block %} Signup {%endblock%}
+  {% comment %} {% block title_block %} Home Page {%endblock%} {% endcomment %}
   
   {% block css_block %} 
 
@@ -22,10 +22,10 @@
     <nav class="navbar navbar-expand-sm bg-light navbar-light">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home' %}">Home</a>
+            <a class="nav-link" href="{% url 'App_Posts:home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url '#' %}">#</a>
+            <a class="nav-link" href="{% url 'App_Login:logout' %}">Logout</a>
           </li>
 
         </ul>
