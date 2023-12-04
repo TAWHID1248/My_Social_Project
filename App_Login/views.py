@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from App_Login.models import UserProfile
 from App_Login.forms import EditProfile
-
+from App_Posts.forms import PostForm
 # Create your views here.
 
 def signup(request):
@@ -37,7 +37,7 @@ def login_page(request):
 
     return render(request,'App_Login/login.html', {'title': 'Login','form': form})
 
-
+@login_required
 def edit_profile(request):
     current_user = UserProfile.objects.get(user=request.user)
     form = EditProfile(instance=current_user)
@@ -46,11 +46,25 @@ def edit_profile(request):
         if form.is_valid():
             form.save(commit=True)
             form = EditProfile(instance=current_user)
+            return HttpResponseRedirect(reverse('App_Login:profile'))
 
-    return render(request,'App_Login/edit_profile.html', {'title': 'Edit Profile', 'form': form})
+    return render(request,'App_Login/profile.html', {'title': 'Edit Profile', 'form': form})
 
 
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('App_Login:login'))
+
+
+@login_required
+def profile(request):
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return HttpResponseRedirect(reverse('home'))
+    return render(request, 'App_Login/user.html', context={'title':'User', 'form': form})
