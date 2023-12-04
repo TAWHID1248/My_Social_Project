@@ -38,6 +38,8 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
   New Post
 </button> 
+<br>
+<br>
 
 <!-- The Modal -->
 <div class="modal" id="myModal">
@@ -69,6 +71,16 @@
   </div>
 </div>
 
+<div class='row'>
+  {% for post in user.post.all %}
+  <div class='crop'>
+    <img src="/media/{{post.image}}" title='{{post.caption}}'>
+  </div> 
+  {% endfor %}
 </div>
+
+</div>
+
+
 
 {%endblock%}
