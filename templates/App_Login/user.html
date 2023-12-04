@@ -26,7 +26,7 @@
     {% endif %}
   </div>
   <div class="col-sm-8">
-    <h1>{{user.username}} &nbsp; <a href="#" class="btn btn-light">Edit Profile</a></h1>
+    <h1>{{user.username}} &nbsp; <a href="{% url 'App_Login:edit' %}" class="btn btn-light">Edit Profile</a></h1>
     <br>
     <h4>{{user.post.count}} posts &nbsp; &nbsp; {{user.following.count}} followers &nbsp; &nbsp; {{user.follower.count}} following</h4>
     <br>
@@ -35,8 +35,8 @@
   </div>
 </div>
 <hr>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+{% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
   New Post
-</button>
+</button> {% endcomment %}
 
 {%endblock%}
