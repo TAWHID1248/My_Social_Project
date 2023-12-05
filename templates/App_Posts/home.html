@@ -3,7 +3,11 @@
 
 
 {% block body_block %}
-
-<h1>Home Page</h1>
-
+    {% if search %}
+        {% for user in result %}
+            {{user.username}}
+        {% endfor %}
+    {% else %}  
+      
+    {% endif %}
 {% endblock %}
