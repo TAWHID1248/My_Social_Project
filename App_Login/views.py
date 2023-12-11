@@ -85,11 +85,14 @@ def user(request, username):
 def follow(request, username):
     following_user = User.objects.get(username=username)
     follower_user = request.user
-    already_followed = Follow.objects.filter(follow=follower_user, following=following_user)
+    already_followed = Follow.objects.filter(follower=follower_user, following=following_user)
     if not already_followed:
-        follower_user = Follow(follow=follower_user, following=following_user)
+        follower_user = Follow(follower=follower_user, following=following_user)
         follower_user.save()
-    return HttpResponseRedirect(reverse('App_Login:user', args={'username': username}))
+    return HttpResponseRedirect(reverse('App_Login:user', kwargs={'username': username}))
+
+
+
 
 
 
@@ -97,6 +100,6 @@ def follow(request, username):
 def unfollow(request, username):
     following_user = User.objects.get(username=username)
     follower_user = request.user
-    already_followed = Follow.objects.filter(follow=follower_user, following=following_user)
+    already_followed = Follow.objects.filter(follower=follower_user, following=following_user)
     already_followed.delete()
-    return HttpResponseRedirect(reverse('App_Login:user', args={'username': username}))
+    return HttpResponseRedirect(reverse('App_Login:user', kwargs={'username': username}))
