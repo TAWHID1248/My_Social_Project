@@ -1,7 +1,7 @@
 {% extends "navbar.html" %}
 {% comment %} {%block title_block %} {{title}} {%endblock%} {% endcomment %}
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 {% block body_block %}
     {% if search %}
         {% for user in result %}
@@ -35,6 +35,15 @@
                     <br>
                     <br>
                     <img src='/media/{{post.image}}' width='100%'>
+                    <div style="padding:20px">
+                        {{post.caption}}<br>
+                        {{ post.liked_post.count }} Likes <br>
+                        {% if post.pk in liked_post_list %}
+                        <a href="{% url 'App_Posts:unliked' pk=post.pk %}"><i class="fa fa-heart" style="font-size:36px"></i></a>
+                        {% else %}
+                        <a href="{% url 'App_Posts:liked' pk=post.pk %}"><i class="fa fa-heart-o" style="font-size:36px"></i></a>
+                        {% endif %}
+                      </div>
                 </div>
             </div>
 
